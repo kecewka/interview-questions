@@ -210,22 +210,21 @@ ppai - для настрйоки прокси в bean
 	requires-new -> создаёт новую транзакцию если вызывается из другой транзакции.
 
 
-40. @Service
-	public class A {
+40. 	@Service
+		public class A {
+			@Transactional
+			public method1() {
+				// save data1
+				method2();
+				// exception
+				// save data3
+			}
 
-		@Transactional
-		public method1() {
-			// save data1
-			method2();
-			// exception
-			// save data3
-		}
-
-		@Transcational(propagation = Propagation.REQUIRES_NEW)
-		public method2() {
+			@Transcational(propagation = Propagation.REQUIRES_NEW)
+			public method2() {
 			//save data2
+			}
 		}
-	}
 
 Что будет в коде выше? Какие данные окажутся в БД при вызове метода 1 дата1 дата2 или дата3?
 
